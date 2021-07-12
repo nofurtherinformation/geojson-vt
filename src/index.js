@@ -13,9 +13,9 @@ const defaultOptions = {
     extent: 4096,           // tile extent
     buffer: 64,             // tile buffer on each side
     lineMetrics: false,     // whether to calculate line metrics
-    promoteId: null,        // name of a feature property to be promoted to feature.id
+    promoteId: 'GEOID',        // name of a feature property to be promoted to feature.id
     generateId: false,      // whether to generate feature ids. Cannot be used with promoteId
-    debug: 0                // logging level (0, 1 or 2)
+    debug: 2                // logging level (0, 1 or 2)
 };
 
 class GeoJSONVT {
@@ -51,6 +51,7 @@ class GeoJSONVT {
         if (features.length) this.splitTile(features, 0, 0, 0);
 
         if (debug) {
+            console.log(this.tiles)
             if (features.length) console.log('features: %d, points: %d', this.tiles[0].numFeatures, this.tiles[0].numPoints);
             console.timeEnd('generate tiles');
             console.log('tiles generated:', this.total, JSON.stringify(this.stats));
